@@ -1,0 +1,55 @@
+device: 7
+seed: 3407
+
+model:
+  size: encodedecode
+  in_dim: 22664
+  n_embd: 1024
+  encoder_depth: 1
+  decoder_depth: 1
+  input_noise_factor: 0.0001
+  latent_noise_factor: 0.001
+
+data:
+  batch_size: 16
+  num_workers: 4
+  data_root: "/path/traindata"
+
+train:
+  optimizer:
+    _target_: torch.optim.AdamW
+    lr: 1e-3
+    weight_decay: 5e-3
+
+  lr_scheduler:
+  finetune: False
+  # pretrain_model: '/path/pretrain_model/encoder.ckpt'
+
+  loss_func:
+    _target_: torch.nn.MSELoss
+    reduction: mean
+
+  trainer:
+    _target_:  pytorch_lightning.trainer.Trainer
+    strategy: 'auto'
+    max_epochs: 300
+    check_val_every_n_epoch: True
+    val_check_interval: 
+    log_every_n_steps: 10
+    limit_val_batches: 1
+
+    enable_model_summary: false
+
+    callbacks:
+    - _target_: pytorch_lightning.callbacks.ModelCheckpoint
+      filename: "{epoch}-{val_loss:.4f}"
+      monitor: 'val_loss'
+      mode: 'min'
+      save_top_k: 3
+      verbose: true
+      #- _target_: pytorch_lightning.callbacks.EarlyStopping
+      #monitor: 'val_loss'
+      #min_delta: 0.0001
+      #patience: 10
+      #verbose: True
+      #mode: "min"

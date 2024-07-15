@@ -1,0 +1,41 @@
+device: 7
+
+seed: 3407
+
+model:
+  traj_dim: 1020
+  task_dim: 117
+  hidden_size: 1024
+  feature_dim: 128
+
+data:
+  batch_size: 16
+  num_workers: 4
+  data_root: "/path/traindata"
+
+train:
+  optimizer:
+    _target_: torch.optim.AdamW
+    lr: 1e-4
+    weight_decay: 1e-4
+
+  lr_scheduler:
+
+  trainer:
+    _target_:  pytorch_lightning.trainer.Trainer
+    strategy: 'auto'
+    max_epochs: 400
+    check_val_every_n_epoch:
+    val_check_interval : 100
+    log_every_n_steps: 10
+    limit_val_batches: 1
+
+    enable_model_summary: false
+
+    callbacks:
+    - _target_: pytorch_lightning.callbacks.ModelCheckpoint
+      filename: "{epoch}-{val_loss:.4f}"
+      monitor: 'val_loss'
+      mode: 'min'
+      save_top_k: 3
+      verbose: true
