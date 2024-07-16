@@ -40,7 +40,9 @@ python train.py
 Training the policy generator with conditional diffusion models:
 
 Data processing: 
+
 Make-An-Agent uses a latent diffusion model, so the data should be processed using the autoencoder and behavior embedding.
+
 You can directly use the pretrained models in [HuggingFace](https://huggingface.co/cheryyunl/Make-An-Agent).
 
 Or use the processed training data in `train_data/process_data.pt` to train the policy generator.
@@ -60,8 +62,11 @@ python train.py
 Tips: We save both the best model and the last model during training. 
 
 Evaluating the synthesized parameters:
+
 First we need to decode the latent parameters into policy parameters. Then deploy synthesized policy networks in the simulator.
+
 We provide the processed test data in `test_data/processed/`. You also can process your test data using `dataset/process_data.py`.
+
 Change `ckpt_dir`, `encoder_dir` and `data_dir` in `PolicyGenerator/config.yaml`.
 ```bash
 cd PolicyGenerator
@@ -71,7 +76,9 @@ python eval.py
 ## 📗 Dataset and Pretrained Models
 
 We release all pretrain models and data in [Huggingface](https://huggingface.co/cheryyunl/Make-An-Agent). 
+
 **Pretrained models**: Include `autoencoder.pt`, `behavior_embedding.pt` and `model-best.pt`.
+
 **Dataset**: Training data is in `train_data/` and test data is in `test_data/`
 
 
@@ -90,4 +97,5 @@ year={2024}
 
 ## 🌷 Acknowledgement
 Our work is primarily based on the following projects: [Diffusion Policy](https://github.com/real-stanford/diffusion_policy), [pytorch-lightning](https://github.com/Lightning-AI/pytorch-lightning), [Metaworld](https://github.com/Farama-Foundation/Metaworld), [Robosuite](https://github.com/ARISE-Initiative/robosuite), [walk-these-ways](https://github.com/Improbable-AI/walk-these-ways). We thank these authors for their contributions to the open-source community.
+
 For any questions or suggestions, please contact [Yongyuan Liang](https://cheryyunl.github.io/).
