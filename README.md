@@ -40,10 +40,10 @@ python train.py
 Training the policy generator with conditional diffusion models:
 
 Data processing: 
-Make-An-Agent uses latent diffusion model, so the data should be processed using the autoencoder and behavior embedding.
-You can direclty use the pretrained models in [HuggingFace](https://huggingface.co/cheryyunl/Make-An-Agent)
+Make-An-Agent uses a latent diffusion model, so the data should be processed using the autoencoder and behavior embedding.
+You can directly use the pretrained models in [HuggingFace](https://huggingface.co/cheryyunl/Make-An-Agent).
 
-Or directly use the processed training data in `train_data/process_data.pt` to train the policy generator.
+Or use the processed training data in `train_data/process_data.pt` to train the policy generator.
 
 If you want to process your own data, change the paths of data and pretrained model root in `dataset/config.yaml`.
 ```bash
@@ -57,16 +57,22 @@ cd PolicyGenerator
 python train.py
 ```
 
+Tips: We save both the best model and the last model during training. 
 
 Evaluating the synthesized parameters:
-
-Change `data_root` in `PolicyGenerator/config.yaml`.
+First we need to decode the latent parameters into policy parameters. Then deploy synthesized policy networks in the simulator.
+We provide the processed test data in `test_data/processed/`. You also can process your test data using `dataset/process_data.py`.
+Change `ckpt_dir`, `encoder_dir` and `data_dir` in `PolicyGenerator/config.yaml`.
 ```bash
-cd PolicyGenerator/policy_generator
+cd PolicyGenerator
 python eval.py
 ```
 
 ## 📗 Dataset and Pretrained Models
+
+We release all pretrain models and data in [Huggingface](https://huggingface.co/cheryyunl/Make-An-Agent). 
+**Pretrained models**: Include `autoencoder.pt`, `behavior_embedding.pt` and `model-best.pt`.
+**Dataset**: Training data is in `train_data/` and test data is in `test_data/`
 
 
 ## 📝 Citation
