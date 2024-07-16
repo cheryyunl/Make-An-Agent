@@ -1,0 +1,23 @@
+encoder_model:
+  in_dim: 22664
+  n_embd: 1024
+  encoder_depth: 1
+  decoder_depth: 1
+  input_noise_factor: 0.001
+  latent_noise_factor: 0.01
+
+
+
+embedding_model:
+  traj_dim: 1020
+  task_dim: 117
+  hidden_size: 1024
+  feature_dim: 128
+
+
+dir:
+  root_dir: "/path/data"
+  encoder_dir: '/path/pretrain_model/autoencoder.ckpt'
+  embed_dir: '/path/pretrain_model/behavior_embedding.ckpt'
+
+

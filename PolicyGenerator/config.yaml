@@ -65,24 +65,24 @@ data:
 
 eval:
   env_name: ''
-  ckpt_dir: '/path/pretrain_model/diffusion.torch'
+  ckpt_dir: '/path/pretrain_model/model-best.torch'
   encoder_dir: '/path/pretrain_model/encoder.ckpt'
   data_dir: '/path/testdata'
 
 optimizer:
   _target_: torch.optim.AdamW
-  lr: 1.0e-4
+  lr: 2.0e-4
   betas: [0.95, 0.999]
   eps: 1.0e-8
   weight_decay: 5.0e-4
 
 train:
   device: "cuda:0"
-  seed: 3407
+  seed: 42
   debug: False
   resume: False
   lr_scheduler: cosine
-  lr_warmup_steps: 500
+  lr_warmup_steps: 1000
   num_epochs: 1000
   gradient_accumulate_every: 1
   use_ema: True
