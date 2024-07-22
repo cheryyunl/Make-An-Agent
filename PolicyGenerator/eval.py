@@ -93,9 +93,9 @@ class EvalWorkspace:
         gen_min_time = np.min(gen_avg_success_time_list)
 
 
-        gen_avg_reward_list.sort(reverse=True)
-        gen_avg_success_list.sort(reverse=True)
-        gen_avg_success_time_list.sort(reverse=False)
+        gen_avg_reward_list = np.sort(gen_avg_reward_list)[::-1]
+        gen_avg_success_list = np.sort(gen_avg_success_list)[::-1]
+        gen_avg_success_time_list = np.sort(gen_avg_success_time_list)[::-1]
 
         gen_top_5_rewards = np.average(gen_avg_reward_list[:5])
         gen_top_10_rewards = np.average(gen_avg_reward_list[:10])
